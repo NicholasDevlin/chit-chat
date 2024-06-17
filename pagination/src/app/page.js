@@ -44,7 +44,7 @@ export default function Home() {
   }, [tableParams.current]);
 
   const handleTableChange = (pagination, filters, sorter) => {
-    setTableParams((prevData) => ({...prevData, ...pagination}));
+    setTableParams((prevData) => ({ ...prevData, ...pagination }));
   }
 
   const handleInputChange = (input) => {
@@ -69,13 +69,19 @@ export default function Home() {
       if (responseData.success) {
         setCustomer(tableParams);
         setIsModalOpen(false);
-        setTableParams(responseData.pagination)
+        setTableParams((prevData) => ({...prevData, ...responseData.pagination}));
+        fetchData();
       } else {
         throw new Error(`${responseData.message}`);
       }
     } catch (error) {
       alert(error);
     }
+  }
+
+  const handleUpdate = (record) => {
+    setIsModalOpen(true);
+    setCustomer(record);
   }
 
   return (
@@ -93,7 +99,7 @@ export default function Home() {
           </Row>
           <Table
             dataSource={data}
-            columns={columns}
+            columns={columns(handleUpdate)}
             pagination={tableParams}
             onChange={handleTableChange}
             loading={loading}

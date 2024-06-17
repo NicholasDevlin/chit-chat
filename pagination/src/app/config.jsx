@@ -1,6 +1,7 @@
 import {Button} from "antd";
 
-const columns = [
+const columns = (update) => {
+  return ([
   {
     title: 'Name',
     dataIndex: 'name',
@@ -20,16 +21,16 @@ const columns = [
     title: 'Action',
     dataIndex: 'action',
     key: 'action',
-    // render: (_, record) => {
-    //   return (
-    //     <>
-    //       <Button>
-    //         Update
-    //       </Button>
-    //     </>
-    //   );
-    // }
+    render: (_, record) => {
+      return (
+        <>
+          <Button onClick={() => update(record)}>
+            Update
+          </Button>
+        </>
+      );
+    }
   }
-];
+])};
 
 export default columns;
