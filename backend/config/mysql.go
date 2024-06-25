@@ -62,5 +62,7 @@ func StartDB(cfg *DBConfig) *gorm.DB {
 		panic(err)
 	}
 	DB.AutoMigrate(&model.Customer{})
+	DB.AutoMigrate(&model.Product{})
+	DB.AutoMigrate(&model.ProductDetail{})
 	return DB
 }
