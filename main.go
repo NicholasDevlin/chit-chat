@@ -23,11 +23,17 @@ func main() {
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
 	}))
 
-	repository := repositories.NewCustomerRepository(db)
-	service := service.NewCustomerService(repository)
-	controller := controller.NewCustomerController(service)
-	e.POST("/customer", controller.CreateCustomer)
-	e.GET("/customer", controller.GetAllCustomer)
+	customerRepository := repositories.NewCustomerRepository(db)
+	customerService := service.NewCustomerService(customerRepository)
+	customerController := controller.NewCustomerController(customerService)
+	e.POST("/customer", customerController.CreateCustomer)
+	e.GET("/customer", customerController.GetAllCustomer)
+
+	productRepository := repositories.NewProductRepository(db)
+	productService := service.NewProductService(productRepository)
+	productController := controller.NewProductController(productService)
+	e.POST("/product", productController.CreateProduct)
+	e.GET("/product", productController.GetAllProduct)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", appConfig.APP_PORT)))
 }

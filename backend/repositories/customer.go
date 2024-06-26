@@ -37,6 +37,9 @@ func (c *customerRepository) GetAllCustomer(filter model.CustomerFilter, paginat
 	if filter.UUID != uuid.Nil {
 		query = query.Where("uuid = ?", filter.UUID)
 	}
+	if filter.Name != "" {
+		query = query.Where("name LIKE ?", "%"+filter.Name+"%")
+	}
 	if filter.SortName {
 		query = query.Order("name ASC")
 	}
