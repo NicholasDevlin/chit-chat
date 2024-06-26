@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import { useEffect, useState } from "react"
 
-export default function LookUp({ placeholder, dataSource, column, onSelect }) {
+export default function LookUp({ placeholder, dataSource, column, onSelect, onChange }) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([] || dataSource);
   const [selected, setSelected] = useState({});
@@ -26,6 +26,7 @@ export default function LookUp({ placeholder, dataSource, column, onSelect }) {
       newData.name = e.target.value;
       return newData;
     });
+    onChange && onChange(e.target.value)
   }
 
   return (

@@ -36,7 +36,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [tableParams])
 
   const columns =
     [
@@ -52,6 +52,16 @@ export default function Home() {
       },
     ];
 
+  const handleOnChange = (value) => {
+    setTableParams({
+      current: 1,
+      pageSize: 10,
+      total: 0,
+      sortName: true,
+      name: value,
+    })
+  }
+
   return (
     <>
       <div className="flex justify-between mb-3">
@@ -60,7 +70,7 @@ export default function Home() {
         <div>Age: {data.age}</div>
       </div>
       <div>
-        <LookUp dataSource={options} onSelect={setData} column={columns} />
+        <LookUp dataSource={options} onChange={handleOnChange} onSelect={setData} column={columns} />
       </div>
     </>
   );
