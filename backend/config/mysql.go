@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"myapp/backend/model"
+	"myapp/backend/model/user"
 
 	"os"
 	"strconv"
@@ -64,5 +65,6 @@ func StartDB(cfg *DBConfig) *gorm.DB {
 	DB.AutoMigrate(&model.Customer{})
 	DB.AutoMigrate(&model.Product{})
 	DB.AutoMigrate(&model.ProductDetail{})
+	DB.AutoMigrate(&user.User{})
 	return DB
 }

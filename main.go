@@ -35,5 +35,12 @@ func main() {
 	e.POST("/product", productController.CreateProduct)
 	e.GET("/product", productController.GetAllProduct)
 
+	userRepository := repositories.NewUsersRepository(db)
+	userService := service.NewUserService(userRepository)
+	userController := controller.NewUserController(userService)
+	e.POST("/user/register", userController.RegisterUsers)
+	e.POST("/user/login", userController.LoginUser)
+	e.GET("/user", userController.GetAllUser)
+
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", appConfig.APP_PORT)))
 }

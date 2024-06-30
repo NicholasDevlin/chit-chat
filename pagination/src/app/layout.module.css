@@ -1,0 +1,27 @@
+
+.profileMenu {
+  position: absolute;
+  min-width: 150px;
+  top: 100%;
+  right: 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px 5px;
+}
+
+.profileMenu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profileMenu li {
+  padding: 10px;
+}
+
+.profileMenu a {
+  width: 100%;
+  text-decoration: none;
+  display: block;
+}

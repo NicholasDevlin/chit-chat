@@ -2,8 +2,10 @@
 import { Button, Col, Row, Table } from "antd";
 import React, { useState, useEffect } from "react";
 import columns, { detailColumns } from "./config";
+import { useRouter } from 'next/navigation';
 
 export default function Product() {
+  const route = useRouter();
   const [data, setData] = useState([]);
   const [detailData, setDetailData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -84,7 +86,7 @@ export default function Product() {
   }
 
   const getDetail = (record) => {
-    let detail = data.find(x=> x.uuid === record.uuid);
+    let detail = data.find(x => x.uuid === record.uuid);
     setDetailData(detail.productDetail);
   }
 
@@ -93,7 +95,7 @@ export default function Product() {
       <Row className="p-8 h-screen">
         <Col span={24}>
           <Row className="mb-3">
-            <Button type="primary">Add Product</Button>
+            <Button type="primary" onClick={() => route.push("/product/form")}>Add Product</Button>
           </Row>
           <Table
             onRow={(record) => {

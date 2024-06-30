@@ -1,8 +1,9 @@
 "use client"
 import LookUp from "@/component/lookup";
+import withAuth from "@/component/withAuth";
 import React, { useState, useEffect } from "react";
 
-export default function Home() {
+function Home() {
   const [data, setData] = useState({
     name: "",
     address: "",
@@ -16,7 +17,7 @@ export default function Home() {
     sortName: true,
     name: ""
   });
-
+  const [numeric, setNumeric ] = useState(0);
   const fetchData = () => {
     const queryParams = new URLSearchParams(tableParams);
     fetch(`http://localhost:80/customer?${queryParams.toString()}`)
@@ -61,7 +62,7 @@ export default function Home() {
       name: value,
     })
   }
-
+  
   return (
     <>
       <div className="flex justify-between mb-3">
@@ -72,7 +73,9 @@ export default function Home() {
       <div>
         <LookUp dataSource={options} onChange={handleOnChange} onSelect={setData} column={columns} />
       </div>
+      {/* <input value={numeric} style={{color: "#000"}} onChange={(e) => setNumeric(formatNumberWithCommas(e.target.value))} /> */}
     </>
   );
 }
 
+export default withAuth(Home);

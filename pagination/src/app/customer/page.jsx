@@ -2,6 +2,7 @@
 import { Table, Row, Col, Button, Modal, Input } from "antd";
 import columns from "@/app/customer/config"
 import React, { useState, useEffect } from "react";
+import NumberFormat from 'react-number-format';
 
 export default function Customer() {
   const [data, setData] = useState([]);
@@ -50,7 +51,7 @@ export default function Customer() {
   const handleInputChange = (input) => {
     let name = input.target.name;
     let value = input.target.value;
-    setCustomer((prevData) => ({ ...prevData, [name]: name == "age" ? parseInt(value) : value, [name]: name == "name" ?  value.toUpperCase() : value }));
+    setCustomer((prevData) => ({ ...prevData, [name]: name == "name" ? value.toUpperCase() : value, [name]: name === "age" ? parseInt(value) : value }));
   }
 
   const handleSubmit = async () => {
@@ -124,6 +125,18 @@ const ModalEditor = ({ isOpen, onOk, onCancel, customer, handleInputChange }) =>
       <Row className="my-5" gutter={10}>
         <h4>Age</h4>
         <Input value={customer.age} onChange={handleInputChange} name="age" placeholder="Age" type="number" />
+      </Row>
+      <Row className="my-5" gutter={10}>
+        <h4>Test separator : </h4>
+        <div>
+          <NumberFormat className="border" thousandSeparator={true} />
+        </div>
+      </Row>
+      <Row className="my-5" gutter={10}>
+        <h4>Test format : </h4>
+        <div>
+          <NumberFormat className="border" format={"##/##/####"} mask={['D', 'D', 'M', 'M', 'Y', 'Y', 'Y', 'Y']} placeholder="DD/MM/YYYY" thousandSeparator={true} />
+        </div>
       </Row>
     </Modal>);
 }
